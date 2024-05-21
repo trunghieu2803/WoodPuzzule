@@ -9,15 +9,24 @@ public class GameManager : Singleton<GameManager>
     private Level _level;
     public Level level =>  _level;
 
-    public bool finalTarget = false;
+    public bool finalTarget;
 
-    public bool checkMove = false;
+    public bool checkMove;
 
-    public bool checkTarget = false;
+    public bool checkTarget;
 
-    public int _index = 10000;
-    void Start()
+    public int _index;
+    private void OnEnable()
     {
+        finalTarget = false;
+        checkMove = false;
+        checkTarget = false;
+        _index = 10000;
         _level = _transform.GetComponentInChildren<Level>();
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }

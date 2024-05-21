@@ -1,0 +1,55 @@
+
+Anim_Chest.png
+size: 1644,900
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Chest
+  rotate: false
+  xy: 865, 97
+  size: 446, 196
+  orig: 448, 198
+  offset: 1, 1
+  index: -1
+Chest_Close
+  rotate: true
+  xy: 1467, 2
+  size: 446, 149
+  orig: 448, 151
+  offset: 1, 1
+  index: -1
+Chest_Open
+  rotate: true
+  xy: 1467, 450
+  size: 445, 173
+  orig: 447, 175
+  offset: 1, 1
+  index: -1
+Glow
+  rotate: false
+  xy: 2, 33
+  size: 861, 862
+  orig: 871, 872
+  offset: 5, 5
+  index: -1
+Glow2
+  rotate: false
+  xy: 865, 295
+  size: 600, 600
+  orig: 602, 602
+  offset: 1, 1
+  index: -1
+Gold
+  rotate: false
+  xy: 865, 23
+  size: 316, 72
+  orig: 318, 74
+  offset: 1, 1
+  index: -1
+Lock
+  rotate: false
+  xy: 1313, 157
+  size: 127, 136
+  orig: 129, 138
+  offset: 1, 1
+  index: -1

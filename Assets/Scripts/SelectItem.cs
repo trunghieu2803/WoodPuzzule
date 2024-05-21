@@ -42,6 +42,7 @@ public class SelectItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
                     Vector2 pos = Camera.main.ScreenToWorldPoint(eventData.position);
                     this.GetComponent<Image>().enabled = false;
                     _sprite = GameManager.Instant.level.ListPiece[i];
+                    GameManager.Instant.level.ListPiece[i].sortingOrder = 10;
                     GameManager.Instant.level.ListPiece[i].enabled = true;
                     GameManager.Instant.level.ListPiece[i].transform.position = pos + new Vector2(0, 2f);
                     GameManager.Instant.checkMove = true;

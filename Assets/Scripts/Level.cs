@@ -13,9 +13,9 @@ public class Level : MonoBehaviour
 
     public List<SpriteRenderer> ListPiece => _listPiece;
 
-    [SerializeField] List<Sprite> _ListSprite;
+    [SerializeField] List<Sprite> _ListSprite_Thumbnail;
 
-    public List<Sprite> ListSprite => _ListSprite;
+    public List<Sprite> ListSprite => _ListSprite_Thumbnail;
     
 
     private void Update()
@@ -23,9 +23,10 @@ public class Level : MonoBehaviour
         if (GameManager.Instant._index < _listTransform.Count)
         {
             float distance = Vector2.Distance(_listPiece[GameManager.Instant._index].transform.position, _listTransform[GameManager.Instant._index].position);
-            if (distance > 0 && distance < 0.25 && GameManager.Instant.checkTarget)
+            if (distance > 0 && distance < 0.3f && GameManager.Instant.checkTarget)
             {
                 _listPiece[GameManager.Instant._index].transform.position = _listTransform[GameManager.Instant._index].position;
+                _listPiece[GameManager.Instant._index].sortingOrder = 2;
                 GameManager.Instant._index = 10000;
                 GameManager.Instant.finalTarget = true;
                 GameManager.Instant.checkTarget = false;

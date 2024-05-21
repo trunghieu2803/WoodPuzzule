@@ -13,39 +13,40 @@ public class SelectItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     SpawnThumbnail _spawnThumbnail;
 
     SpriteRenderer _sprite;
+    GameManager gameManager;
     //int _index;
     private void Start()
     {
+        gameManager = GameManager.Instant;
         _spawnThumbnail = this.GetComponentInParent<SpawnThumbnail>();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GameManager.Instant._index < _spawnThumbnail.ListThumnail.Count)
+        if (gameManager._index < _spawnThumbnail.ListThumnail.Count)
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(eventData.position);
-            GameManager.Instant.level.ListPiece[GameManager.Instant._index].transform.position = pos + new Vector2(0, 2f);
-        }
-        
+            gameManager.level.ListPiece[gameManager._index].transform.position = pos + new Vector2(0, 2f);
+        }        
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(GameManager.Instant.checkMove == false)
+        if(gameManager.checkMove == false)
         {
             for (int i = 0; i < _spawnThumbnail.ListThumnail.Count; i++)
             {
                 if (_spawnThumbnail.ListThumnail[i].name.Equals(this.gameObject.name))
                 {
                     //_index = i;
-                    GameManager.Instant._index = i;
+                    gameManager._index = i;
                     Vector2 pos = Camera.main.ScreenToWorldPoint(eventData.position);
                     this.GetComponent<Image>().enabled = false;
-                    _sprite = GameManager.Instant.level.ListPiece[i];
-                    GameManager.Instant.level.ListPiece[i].sortingOrder = 10;
-                    GameManager.Instant.level.ListPiece[i].enabled = true;
-                    GameManager.Instant.level.ListPiece[i].transform.position = pos + new Vector2(0, 2f);
-                    GameManager.Instant.checkMove = true;
+                    _sprite = gameManager.level.ListPiece[i];
+                    gameManager.level.ListPiece[i].sortingOrder = 10;
+                    gameManager.level.ListPiece[i].enabled = true;
+                    gameManager.level.ListPiece[i].transform.position = pos + new Vector2(0, 2f);
+                    gameManager.checkMove = true;
                 }
             }
         }
@@ -67,19 +68,21 @@ public class SelectItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     IEnumerator checktarget()
     {
         yield return new WaitForSeconds(0.2f);
-        if (GameManager.Instant.finalTarget == true)
+        if (gameManager.finalTarget == true)
         {
-            GameManager.Instant.checkMove = false;
+            gameManager.checkMove = false;
             this.GetComponent<Image>().gameObject.SetActive(false);
             _sprite.enabled = true;
-            GameManager.Instant.checkTarget = false;
-            GameManager.Instant.finalTarget = false;
+            gameManager.checknextLevel++;
+            gameManager.checkTarget = false;
+            gameManager.finalTarget = false;
+            gameManager.wingame(gameManager.checknextLevel);
         }
         else
         {
-            GameManager.Instant._index = 10000;
-            GameManager.Instant.checkTarget = false;
-            GameManager.Instant.checkMove = false;
+            gameManager._index = 10000;
+            gameManager.checkTarget = false;
+            gameManager.checkMove = false;
             this.GetComponent<Image>().enabled = true;
             _sprite.enabled = false;
         }

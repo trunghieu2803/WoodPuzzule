@@ -15,7 +15,7 @@ public class Level : MonoBehaviour
 
     [SerializeField] List<Sprite> _ListSprite_Thumbnail;
 
-    public List<Sprite> ListSprite => _ListSprite_Thumbnail;
+    public List<Sprite> ListSpriteThumbnail => _ListSprite_Thumbnail;
     
 
     private void Update()

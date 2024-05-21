@@ -7,13 +7,15 @@ using UnityEngine.UI;
 
 public class LevelMenu : MonoBehaviour
 {
-    [SerializeField] List<GameObject> list;
-    [SerializeField] Transform _spawnLevelTransform;
-    [SerializeField] Transform _transParentThumbnailUI;
-    [SerializeField] Transform _gameManager;
-    [SerializeField] RectTransform _rectTransform;
-    [SerializeField] RectTransform _rectBoardtransform;
-    [SerializeField] TextMeshProUGUI _textMeshProUGUI;
+    [SerializeField] public List<GameObject> list;
+    [SerializeField] public Transform _spawnLevelTransform;
+    [SerializeField] public Transform _transParentThumbnailUI;
+    [SerializeField] public Transform _gameManager;
+    [SerializeField] public RectTransform _rectTransform;
+    [SerializeField] public RectTransform _rectBoardtransform;
+    [SerializeField] public TextMeshProUGUI _textMeshProUGUI;
+
+    int x;
     public void OpenLevel(int levelId)
     {
 
@@ -21,6 +23,7 @@ public class LevelMenu : MonoBehaviour
         {
             if(g.name.Equals("Level_" + levelId))
             {
+                x = levelId;
                 _textMeshProUGUI.text = "LEVEL " + levelId;
                 Instantiate(g, Vector2.zero, Quaternion.identity, _spawnLevelTransform);
                 _rectTransform.gameObject.SetActive(false);
@@ -28,6 +31,36 @@ public class LevelMenu : MonoBehaviour
                 _rectBoardtransform.gameObject.SetActive(true);
             }
         }
+    }
+
+
+    public void nextLevel()
+    {
+        Transform _transformLevel = _spawnLevelTransform.GetChild(0).transform;
+        Destroy(_transformLevel.gameObject);
+        StartCoroutine(nextleveltest());
+        
+    }
+
+    IEnumerator nextleveltest()
+    {
+        yield return new WaitForSeconds(0.01f);
+        x = x + 1;
+        foreach (GameObject g in list)
+        {
+            if (g.name.Equals("Level_" + (x)))
+            {
+                
+                _textMeshProUGUI.text = "LEVEL " + (x);
+                Instantiate(g, Vector2.zero, Quaternion.identity, _spawnLevelTransform);
+                _rectTransform.gameObject.SetActive(false);
+                _gameManager.gameObject.SetActive(true);
+                _rectBoardtransform.gameObject.SetActive(true);
+            }
+        }
+
+        GameManager.Instant._imgwin.gameObject.SetActive(false);
+        GameManager.Instant._anim.gameObject.SetActive(false);
     }
 
     public void LevelSelection()

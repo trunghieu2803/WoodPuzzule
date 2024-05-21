@@ -29,7 +29,7 @@ public class SpawnThumbnail : MonoBehaviour
         _listThumnail.Clear();
         yield return new WaitForSeconds(0.1f);
         int i = 0;
-        foreach (Sprite s in GameManager.Instant.level.ListSprite)
+        foreach (Sprite s in GameManager.Instant.level.ListSpriteThumbnail)
         {
             _image.sprite = s;
             _image.SetNativeSize();
